@@ -1,4 +1,11 @@
+import { useState } from "react";
+
 export default function ExpenseList() {
+  const[item,Setitem]=useState({name:"",amount:""})
+  function AddNewitem(){
+    Setitem({name:"ali",amount:10})
+  }
+  
   return (
     <div className="ExpenseList">
       <h4>Expense List</h4>
