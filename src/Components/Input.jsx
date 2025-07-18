@@ -1,6 +1,6 @@
 export default function Input(props){
-    const {placeholder}=props
+    const {placeholder,onChange}=props
     return<>
-    <input type="text" placeholder={placeholder}/>
+    <input type="text" onChange={onChange} placeholder={placeholder}/>
     </>
 }
