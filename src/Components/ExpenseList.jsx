@@ -1,33 +1,19 @@
-import { useState } from "react";
-
-export default function ExpenseList() {
-  const[item,Setitem]=useState({name:"",amount:""})
-  function AddNewitem(){
-    Setitem({name:"ali",amount:10})
-  }
-  
+export default function ExpenseList(props) {
+  const {expense}=props
+  const total=expense.reduce((sum,item)=>(sum+item.amount),0)
   return (
     <div className="ExpenseList">
       <h4>Expense List</h4>
       <ul className="ExpenseItemes">
-        <li>
-          <div className="items">
-            <span>lanch</span>
-            <span>10$</span>
-          </div>
-        </li>
-        <li>
-          <div className="items">
-            <span>haircut</span>
-            <span>30$</span>
-          </div>
-        </li>
-        <li>
-            <div className="total">
-                <span>Total: 40$</span>
-            </div>
-        </li>
+        {expense.map((item, index) => {
+          <li key={index}>
+            {item.name}-{item.amount}$-{item.date}
+          </li>;
+        })}
       </ul>
+      <div className="total">
+        <span><strong>Total:</strong> {total} $</span>
+      </div>
     </div>
   );
 }
