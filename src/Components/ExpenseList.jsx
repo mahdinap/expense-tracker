@@ -7,7 +7,7 @@ export default function ExpenseList(props) {
       <ul className="ExpenseItemes">
         {expenses.map((item, index) => (
           <li key={index}>
-            {item.name}-{item.amount}$-{item.date}
+            {item.name}-{item.amount}$-{new Date(item.date).toLocaleDateString()}
           </li>
         ))}
       </ul>
