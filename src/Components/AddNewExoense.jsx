@@ -4,7 +4,8 @@ import Input from "./Input";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function AddNewExpense() {
+export default function AddNewExpense(prop) {
+  const {onAddExpense}=prop
   const[expense,setExpense]=useState([]) // save items in a list
   const[formDate,setFormData]=useState({name:"",amount:"",date:null})
   
@@ -17,8 +18,9 @@ export default function AddNewExpense() {
     const newExpense={
       ...formDate,
       amount:Number(formDate.amount),
-      date:formDate.date || new Date().toString
+      date:formDate.date || new Date().toString()
     }
+    onAddExpense(newExpense); 
     setExpense((prev)=>[...prev,newExpense])
     setFormData({name:"",amount:"",date:null})
   }
@@ -29,24 +31,26 @@ export default function AddNewExpense() {
         <div className="form">
           <div className="inputs">
             <Input
+            name="name"
               placeholder="Expense title"
               onChange={handleChange}
-              value={expense.name}
+              value={formDate.name}
             />
             <Input
+            name="amount"
               placeholder="Amount"
               onChange={handleChange}
-              value={expense.amount}
+              value={formDate.amount}
             />
 
             <DatePicker
               dateFormat="yyyy/MM/dd"
-              // selected={selectedDate}
-              onChange={handleChange}
+              selected={formDate.date}
+               onChange={(date) => setFormData((prev) => ({ ...prev, date }))}
             />
           </div>
 
-          <Button onClick={() => console.log(expense)} />
+          <Button onClick={addNewExpense} />
         </div>
       </div>
     </>
