@@ -9,7 +9,7 @@ import Picker from "@emoji-mart/react";
 
 export default function AddNewExpense(prop) {
   const { onAddExpense } = prop;
-  const [expense, setExpense] = useState([]); // save items in a list
+  const [expense, setExpense] = useState([]); 
   const [formDate, setFormData] = useState({
     name: "",
     amount: "",
@@ -17,12 +17,12 @@ export default function AddNewExpense(prop) {
   });
 
   const [showPicker, setShowPicker] = useState(false);
-  const [text, setText] = useState("");
+  
 
   const addEmoji = (emoji) => {
     setFormData((prev) => ({
       ...prev,
-      name: prev.name + emoji.native, // اضافه کردن ایموجی به title
+      name: prev.name + emoji.native,
     }));
     setShowPicker(false);
   };
@@ -30,11 +30,10 @@ export default function AddNewExpense(prop) {
   function handleChange(e) {
     const { name, value } = e.target;
       if (name === "amount") {
-    // فقط اعداد و حداکثر یک نقطه مجاز
     if (value === "" || /^\d*\.?\d*$/.test(value)) {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
-    return; // غیر از عدد و نقطه هیچ چیزی اضافه نمیشه
+    return; 
   }
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
