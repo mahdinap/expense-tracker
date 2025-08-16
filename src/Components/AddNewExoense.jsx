@@ -20,9 +20,9 @@ export default function AddNewExpense(prop) {
       amount:Number(formDate.amount),
       date:formDate.date || new Date().toString()
     }
+    setFormData({name:"",amount:"",date:null})
     onAddExpense(newExpense); 
     setExpense((prev)=>[...prev,newExpense])
-    setFormData({name:"",amount:"",date:null})
   }
   return (
     <>
@@ -47,6 +47,7 @@ export default function AddNewExpense(prop) {
               dateFormat="yyyy/MM/dd"
               selected={formDate.date}
                onChange={(date) => setFormData((prev) => ({ ...prev, date }))}
+               placeholderText="Date"
             />
           </div>
 
