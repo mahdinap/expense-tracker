@@ -4,56 +4,97 @@ import Input from "./Input";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+
 export default function AddNewExpense(prop) {
-  const {onAddExpense}=prop
-  const[expense,setExpense]=useState([]) // save items in a list
-  const[formDate,setFormData]=useState({name:"",amount:"",date:null})
-  
-  function handleChange(e){
-    const {name,value}=e.target
-    setFormData((prev)=>({...prev,[name]:value}))
+  const { onAddExpense } = prop;
+  const [expense, setExpense] = useState([]); // save items in a list
+  const [formDate, setFormData] = useState({
+    name: "",
+    amount: "",
+    date: null,
+  });
+
+  const [showPicker, setShowPicker] = useState(false);
+  const [text, setText] = useState("");
+
+  const addEmoji = (emoji) => {
+    setFormData((prev) => ({
+      ...prev,
+      name: prev.name + emoji.native, // اضافه کردن ایموجی به title
+    }));
+    setShowPicker(false);
+  };
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+      if (name === "amount") {
+    // فقط اعداد و حداکثر یک نقطه مجاز
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+    return; // غیر از عدد و نقطه هیچ چیزی اضافه نمیشه
+  }
+    setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
-  function addNewExpense(){
-    const newExpense={
+  function addNewExpense() {
+    const newExpense = {
       ...formDate,
-      amount:Number(formDate.amount),
-      date:formDate.date || new Date().toString()
-    }
-    setFormData({name:"",amount:"",date:null})
-    onAddExpense(newExpense); 
-    setExpense((prev)=>[...prev,newExpense])
+      amount: Number(formDate.amount),
+      date: formDate.date || new Date().toString(),
+    };
+    setFormData({ name: "", amount: "", date: null });
+    onAddExpense(newExpense);
+    setExpense((prev) => [...prev, newExpense]);
   }
+
   return (
     <>
       <div className="ExpenseField">
         <h4>+Add New Expense</h4>
         <div className="form">
-          <div className="inputs">
+            <div className="expense-fild">
             <Input
-            name="name"
+              name="name"
               placeholder="Expense title"
               onChange={handleChange}
               value={formDate.name}
             />
+            <button
+              onClick={() => setShowPicker(!showPicker)}
+              className="ml-2 p-2 border rounded emojiBtn"
+
+            >
+              😀
+            </button>
+            </div>
+
             <Input
-            name="amount"
+              name="amount"
+              type="text"
               placeholder="Amount"
               onChange={handleChange}
               value={formDate.amount}
             />
 
+            {showPicker && (
+              <div style={{ position: "absolute", top: "40px", zIndex: 1000 }}>
+                <Picker data={data} onEmojiSelect={addEmoji} />
+              </div>
+            )}
+
             <DatePicker
               dateFormat="yyyy/MM/dd"
               selected={formDate.date}
-               onChange={(date) => setFormData((prev) => ({ ...prev, date }))}
-               placeholderText="Date"
+              onChange={(date) => setFormData((prev) => ({ ...prev, date }))}
+              placeholderText="Date"
             />
           </div>
 
-          <Button onClick={addNewExpense} />
+          <Button className="addExpense" onClick={addNewExpense} />
         </div>
-      </div>
     </>
   );
 }

@@ -45,17 +45,8 @@ html {
   border-radius: 16px;
   margin: 20px;
 }
-button {
-  padding: 5px 8px;
-  margin: 12px;
-  background-color: cornflowerblue;
-  color: aliceblue;
-  height: 40px;
-}
-button:hover {
-  border: 1px solid #ccc;
-  /* height: 40px; */
-}
+
+
 .Header {
   border-bottom: 2px solid #ccc;
   display: flex;
@@ -101,14 +92,7 @@ h4 {
   border-radius: 5px;
   font-weight: 500;
 }
-.inputs {
-  display: flex;
-  flex-direction: column;
-}
-.form {
-  display: flex;
-  align-items: center;
-}
+
 .emoji {
   animation: logo-spin infinite 15s linear;
   display: inline-block;
@@ -117,4 +101,29 @@ h4 {
 .react-datepicker {
   position: absolute !important;
   z-index: 10;
+}
+
+.emojiBtn{
+  background-color: transparent;
+  max-width: 80px;
+  border: none;
+  
+}
+.expense-fild{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.addExpense{
+  margin-top: 10px;
+ background-color: cornflowerblue;
+ color: white;
+ 
+padding: 5px 8px;
+  height: 35px;
 }

@@ -1,6 +1,6 @@
 export default function Button(props){
-    const {value,onClick}=props
+    const {value,onClick,className}=props
     return<>
-    <button type="button" value={value} onClick={onClick}>Add Expense</button>
+    <button type="button" className={className} value={value} onClick={onClick}>Add Expense</button>
     </>
 }
