@@ -2,7 +2,7 @@
 
 A simple and modern **Expense Tracker App** built with **React**.  
 This app allows you to add, manage, and track your daily expenses with features like emoji selector, date picker, and clean UI.  
-
+[live demo](https://expensetracker-my-react-project.netlify.app/)
 ---
 
 ## ✨ Features  
